@@ -1,0 +1,50 @@
+{
+  "business_logo": "",
+  "business_code": "",
+  "business_name": "",
+  "business_legal_name": "",
+  "email_address": "",
+  "mobile_number": "",
+  "land_line_number": "",
+  "official_website": "",
+  "business_ntn_number": "",
+  "legal_entity": "",
+  "other_legal_entity": "",
+  "business_category": "",
+  "expected_monthly_turnover": "",
+  "auth_person_name": "",
+  "auth_person_cnic": "",
+  "establishment_with_status": "",
+  "payment_method": {
+    "method": ""
+  },
+  "additional_business_details": {
+    "business_owner_name": "",
+    "business_owner_cnic": "",
+    "office_premises": "",
+    "year_at_current_location": "",
+    "year_at_current_business": "",
+    "address_Details": {
+      "official_address": "",
+      "state_province": "",
+      "city": "",
+      "postal_code": "",
+      "country": ""
+    }
+  },
+  "bank_account_details": {
+    "title_Of_Account": "",
+    "account_number": "",
+    "iban": "",
+    "bank_name": "",
+    "branch_name": "",
+    "branch_code": ""
+  },
+  "business_documents": {
+    "cnic": "",
+    "mCertificate": "",
+    "ntn": "",
+    "rCertificate": "",
+    "utilityBill": ""
+  }
+}
