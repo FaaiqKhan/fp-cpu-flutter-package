@@ -966,7 +966,7 @@ class _BusinessSignUpFormState extends State<BusinessSignUpForm> {
                       new Container(
                         width: Constant.Layout.dp100,
                         height: Constant.Layout.dp50,
-                        child: new Image.asset(AssetImage('assets/images/foree_logo.png', package: 'flutter_app').toString()),
+                        child: new Image.asset(AssetImage('assets/images/foree_logo.png', package: 'fp_business_onboadring_package').toString()),
                         // child: new Image.asset("assets/images/foree_logo.png")
                       ),
                       new Row(
