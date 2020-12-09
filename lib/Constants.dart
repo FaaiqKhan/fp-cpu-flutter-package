@@ -260,7 +260,7 @@ class PaddingDetails {
 
 class RequiredAssets {
   static Future<String> loadResult() async {
-    var resultAsset = AssetImage('assets/result', package: 'flutter_package');
+    var resultAsset = AssetImage('assets/result', package: 'fp_business_onboadring_package');
     return await rootBundle.loadString(resultAsset.keyName);
   }
 }
