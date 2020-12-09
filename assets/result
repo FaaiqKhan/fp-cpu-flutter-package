@@ -18,19 +18,19 @@
   "payment_method": {
     "method": ""
   },
+  "address_Details": {
+    "official_address": "",
+    "state_province": "",
+    "city": "",
+    "postal_code": "",
+    "country": ""
+  },
   "additional_business_details": {
     "business_owner_name": "",
     "business_owner_cnic": "",
     "office_premises": "",
     "year_at_current_location": "",
-    "year_at_current_business": "",
-    "address_Details": {
-      "official_address": "",
-      "state_province": "",
-      "city": "",
-      "postal_code": "",
-      "country": ""
-    }
+    "year_at_current_business": ""
   },
   "bank_account_details": {
     "title_Of_Account": "",
