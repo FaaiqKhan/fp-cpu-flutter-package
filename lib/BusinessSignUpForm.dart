@@ -370,14 +370,9 @@ class _BusinessSignUpFormState extends State<BusinessSignUpForm> {
                             padding: Constant.PaddingDetails.textTopPadding,
                             child: TextFormField(
                               decoration: InputDecoration(
-                                  border: const OutlineInputBorder(),
-                                  labelText: Constant.FormLabels.OFFICIAL_WEBSITE
+                                border: const OutlineInputBorder(),
+                                labelText: Constant.FormLabels.OFFICIAL_WEBSITE
                               ),
-                              validator: (val) {
-                                if (val.isEmpty)
-                                  return Constant.ErrorFields.MANDATORY;
-                                else return null;
-                              },
                               onChanged: (val) => officialWebsite = val,
                             ),
                           ),
