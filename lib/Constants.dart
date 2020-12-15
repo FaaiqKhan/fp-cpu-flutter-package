@@ -142,7 +142,7 @@ class RequiredDocs {
   static const String btnUTILITY_BILL = "Utility Bill";
 
   static const String logoText = "Business Logo";
-  static const String logoDescription = "Billers can upload their Business logo. This logo will be reflected in Foree App alongside the business name";
+  static const String logoDescription = "Biller can upload their Business logo. This logo will be reflected in Foree App alongside the business name";
 
   static const String C = "CNIC";
   static const String MC = "Account Maintenance Certificate";
@@ -279,5 +279,5 @@ class AssetsPath {
   static const String BANKS = "assets/banks";
   static const String RESULT = "assets/result";
   static const String RESULT_OBJECT = "assets/resultObject";
-  static const String FOREE_LOGO = "assets/images/foree_logo.png";
+  static const String FOREE_LOGO = "https://foree.co/assets/img/logo.png";
 }

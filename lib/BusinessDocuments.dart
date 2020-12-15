@@ -681,7 +681,7 @@ class _BusinessDocumentsState extends State<BusinessDocuments> {
                       new Container(
                           width: Constant.Layout.dp100,
                           height: Constant.Layout.dp50,
-                          child: new Image.asset("assets/images/foree_logo.png")
+                          child: new Image.network(Constant.AssetsPath.FOREE_LOGO)
                       ),
                       new ElevatedButton(
                         onPressed: () {

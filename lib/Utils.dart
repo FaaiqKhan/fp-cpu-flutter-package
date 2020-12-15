@@ -25,9 +25,4 @@ class Utilities {
         package: 'fp_business_onboadring_package');
     return await rootBundle.loadString(bankAsset.keyName);
   }
-  static Future<ByteData> loadLogo() async {
-    var logo = AssetImage(AssetsPath.FOREE_LOGO,
-        package: 'fp_business_onboadring_package');
-    return await rootBundle.load(logo.keyName);
-  }
 }

@@ -5,24 +5,10 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fp_business_onboadring_package/Utils.dart';
 
 import 'BusinessDocuments.dart';
 import 'Result.dart';
 import 'Constants.dart' as Constant;
-
-Future<String> loadBanks() async {
-  return await rootBundle.loadString(Constant.AssetsPath.BANKS);
-}
-
-Future<Map<String, String>> loadBankAssets() async {
-  Map<String, String> banks = Map();
-  String banksJsonString = await loadBanks();
-  List<dynamic> banksResponse = jsonDecode(banksJsonString);
-  for (var bank in banksResponse)
-    banks[bank[Constant.FieldKeys.BANK_ID]] = bank[Constant.FieldKeys.BANK_SHORT_NAME];
-  return banks;
-}
 
 class BusinessSignUpForm extends StatefulWidget {
   final String title;
@@ -55,7 +41,6 @@ class _BusinessSignUpFormState extends State<BusinessSignUpForm> {
   String director1Cnic, director2Cnic, director3Cnic, director4Cnic;
   String logoPath = "";
   Result rawResult;
-  Map<String, String> _banks = Map();
   bool hasPartners = false;
   bool showLogoUploadIcon = true;
   bool showPartnersFields = false;
@@ -73,7 +58,6 @@ class _BusinessSignUpFormState extends State<BusinessSignUpForm> {
       if (tempLogo.isNotEmpty)
         logo = Image.asset(tempLogo);
     }
-    loadBankAssets().then((value) => _banks = value);
   }
 
   Future<void> uploadImage(FileType type) async {
@@ -994,8 +978,7 @@ class _BusinessSignUpFormState extends State<BusinessSignUpForm> {
                           new Container(
                             width: Constant.Layout.dp100,
                             height: Constant.Layout.dp50,
-                              // child: new Image.asset("assets/images/foree_logo.png")
-                            child: new Image.network("https://foree.co/assets/img/logo.png"),
+                            child: new Image.network(Constant.AssetsPath.FOREE_LOGO),
                           ),
                           new Row(
                             mainAxisAlignment: MainAxisAlignment.end,
@@ -1014,7 +997,6 @@ class _BusinessSignUpFormState extends State<BusinessSignUpForm> {
                                           )
                                       );
                                     } else {
-                                      if (_banks.isNotEmpty) {
                                         rawResult.setDate(date);
                                         // logo is missing.
                                         rawResult.setBusinessLegalName(businessLegalName);
@@ -1042,7 +1024,6 @@ class _BusinessSignUpFormState extends State<BusinessSignUpForm> {
                                         rawResult.setAccountNumber(accountNumber);
                                         rawResult.setIban(iBan);
                                         // Implement api call to send data to foree server.
-                                      }
                                     }
                                   },
                                   child: new Text(Constant.ButtonTags.SAVE)
@@ -1054,42 +1035,40 @@ class _BusinessSignUpFormState extends State<BusinessSignUpForm> {
                                 child: new ElevatedButton(
                                   onPressed: () async {
                                     if (_formKey.currentState.validate()) {
-                                      if (_banks.isNotEmpty) {
-                                        rawResult.setDate(date);
-                                        rawResult.setBusinessLegalName(businessLegalName);
-                                        rawResult.setBusinessName(businessName);
-                                        rawResult.setRegisteredNumber(registeredNumber);
-                                        rawResult.setMobileNumber(mobileNumber);
-                                        rawResult.setRegisteredAddress(registeredAddress);
-                                        rawResult.setPhysicalAddress(physicalAddress);
-                                        rawResult.setEmailAddress(emailAddress);
-                                        rawResult.setOfficialWebSite(officialWebsite);
-                                        rawResult.setLegalEntity(legalEntity);
-                                        rawResult.setLegalEntityOther(legalEntityOther);
-                                        rawResult.setNtnCnicNumber(ntnCnicNumber);
-                                        rawResult.setAuthorizedSignatoryName(authorizedSignatoryName);
-                                        rawResult.setAuthorizedSignatoryCnic(authorizedSignatoryCnic);
-                                        rawResult.setBusinessCategory(businessCategory);
-                                        rawResult.setOfficePremises(officePremises);
-                                        rawResult.setYearAtCurrentLocation(yearsAtCurrentLocation);
-                                        rawResult.setYearAtCurrentBusiness(yearsAtCurrentBusiness);
-                                        rawResult.setExpectedMonthlyTurnOver(expectedMonthlyTurnOver);
-                                        rawResult.setBankName(bankName);
-                                        rawResult.setBranchName(branchName);
-                                        rawResult.setAccountTitle(accountTitle);
-                                        rawResult.setBranchCode(branchCode);
-                                        rawResult.setAccountNumber(accountNumber);
-                                        rawResult.setIban(iBan);
-                                        Navigator.push(_formKey.currentContext,
-                                            new MaterialPageRoute(
-                                                builder: (context) => new
-                                                BusinessDocuments(
-                                                  title: Constant.PageTitle
-                                                    .BUSINESS_DOCUMENTS,
-                                                  data: rawResult, logo: logo,)
-                                            )
-                                        );
-                                      }
+                                      rawResult.setDate(date);
+                                      rawResult.setBusinessLegalName(businessLegalName);
+                                      rawResult.setBusinessName(businessName);
+                                      rawResult.setRegisteredNumber(registeredNumber);
+                                      rawResult.setMobileNumber(mobileNumber);
+                                      rawResult.setRegisteredAddress(registeredAddress);
+                                      rawResult.setPhysicalAddress(physicalAddress);
+                                      rawResult.setEmailAddress(emailAddress);
+                                      rawResult.setOfficialWebSite(officialWebsite);
+                                      rawResult.setLegalEntity(legalEntity);
+                                      rawResult.setLegalEntityOther(legalEntityOther);
+                                      rawResult.setNtnCnicNumber(ntnCnicNumber);
+                                      rawResult.setAuthorizedSignatoryName(authorizedSignatoryName);
+                                      rawResult.setAuthorizedSignatoryCnic(authorizedSignatoryCnic);
+                                      rawResult.setBusinessCategory(businessCategory);
+                                      rawResult.setOfficePremises(officePremises);
+                                      rawResult.setYearAtCurrentLocation(yearsAtCurrentLocation);
+                                      rawResult.setYearAtCurrentBusiness(yearsAtCurrentBusiness);
+                                      rawResult.setExpectedMonthlyTurnOver(expectedMonthlyTurnOver);
+                                      rawResult.setBankName(bankName);
+                                      rawResult.setBranchName(branchName);
+                                      rawResult.setAccountTitle(accountTitle);
+                                      rawResult.setBranchCode(branchCode);
+                                      rawResult.setAccountNumber(accountNumber);
+                                      rawResult.setIban(iBan);
+                                      Navigator.push(_formKey.currentContext,
+                                          new MaterialPageRoute(
+                                              builder: (context) => new
+                                              BusinessDocuments(
+                                                title: Constant.PageTitle
+                                                  .BUSINESS_DOCUMENTS,
+                                                data: rawResult, logo: logo,)
+                                          )
+                                      );
                                     }
                                   },
                                   child: new Text(Constant.ButtonTags.NEXT)
