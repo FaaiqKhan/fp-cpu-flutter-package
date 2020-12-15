@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'BusinessDocuments.dart';
 import 'Result.dart';
 import 'Constants.dart' as Constant;
+import 'Utils.dart';
 
 Future<String> loadBanks() async {
   return await rootBundle.loadString(Constant.AssetsPath.BANKS);
@@ -16,8 +17,7 @@ Future<String> loadBanks() async {
 
 Future<Map<String, String>> loadBankAssets() async {
   Map<String, String> banks = Map();
-  // String banksJsonString = await loadBanks();
-  String banksJsonString = await Constant.RequiredAssets.loadBanks();
+  String banksJsonString = await Utilities.loadBanks();
   List<dynamic> banksResponse = jsonDecode(banksJsonString);
   for (var bank in banksResponse)
     banks[bank[Constant.FieldKeys.BANK_ID]] = bank[Constant.FieldKeys.BANK_SHORT_NAME];
@@ -101,10 +101,8 @@ class _BusinessSignUpFormState extends State<BusinessSignUpForm> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.apiKey == null) {
-      if (widget.apiKey.isEmpty)
+    if (widget.apiKey == null || widget.apiKey.isEmpty)
         throw Exception(Constant.General.API_KEY_REQUIRED);
-    }
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),

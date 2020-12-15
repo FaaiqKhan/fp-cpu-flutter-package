@@ -280,16 +280,3 @@ class AssetsPath {
   static const String RESULT = "assets/result";
   static const String RESULT_OBJECT = "assets/resultObject";
 }
-
-class RequiredAssets {
-  static Future<String> loadResult() async {
-    var resultAsset = AssetImage(AssetsPath.RESULT_OBJECT,
-        package: 'fp_business_onboadring_package');
-    return await rootBundle.loadString(resultAsset.keyName);
-  }
-  static Future<String> loadBanks() async {
-    var bankAsset = AssetImage(AssetsPath.BANKS,
-        package: 'fp_business_onboadring_package');
-    return await rootBundle.loadString(bankAsset.keyName);
-  }
-}
