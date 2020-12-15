@@ -436,7 +436,6 @@ class _BusinessSignUpFormState extends State<BusinessSignUpForm> {
                                           child: TextFormField(
                                             decoration: InputDecoration(
                                                 border: const OutlineInputBorder(),
-                                                hintText: Constant.General.OTHER,
                                                 labelText: Constant.General.OTHER
                                             ),
                                             validator: (val) {
