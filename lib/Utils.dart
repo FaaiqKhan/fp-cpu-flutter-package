@@ -12,19 +12,22 @@ class Utilities {
     final bytes = File(image).readAsBytesSync();
     return base64Encode(bytes);
   }
-
   static Future<String> uploadImage(FileType type) async {
     return await FilePicker.getFilePath(type: type);
   }
-
   static Future<String> loadResult() async {
     var resultAsset = AssetImage(AssetsPath.RESULT_OBJECT,
-    package: 'fp_business_onboadring_package');
+        package: 'fp_business_onboadring_package');
     return await rootBundle.loadString(resultAsset.keyName);
   }
   static Future<String> loadBanks() async {
     var bankAsset = AssetImage(AssetsPath.BANKS,
-    package: 'fp_business_onboadring_package');
+        package: 'fp_business_onboadring_package');
     return await rootBundle.loadString(bankAsset.keyName);
+  }
+  static Future<ByteData> loadLogo() async {
+    var logo = AssetImage(AssetsPath.FOREE_LOGO,
+        package: 'fp_business_onboadring_package');
+    return await rootBundle.load(logo.keyName);
   }
 }

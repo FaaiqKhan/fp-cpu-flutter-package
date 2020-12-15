@@ -5,11 +5,11 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fp_business_onboadring_package/Utils.dart';
 
 import 'BusinessDocuments.dart';
 import 'Result.dart';
 import 'Constants.dart' as Constant;
-import 'Utils.dart';
 
 Future<String> loadBanks() async {
   return await rootBundle.loadString(Constant.AssetsPath.BANKS);
@@ -17,7 +17,7 @@ Future<String> loadBanks() async {
 
 Future<Map<String, String>> loadBankAssets() async {
   Map<String, String> banks = Map();
-  String banksJsonString = await Utilities.loadBanks();
+  String banksJsonString = await loadBanks();
   List<dynamic> banksResponse = jsonDecode(banksJsonString);
   for (var bank in banksResponse)
     banks[bank[Constant.FieldKeys.BANK_ID]] = bank[Constant.FieldKeys.BANK_SHORT_NAME];
@@ -42,7 +42,7 @@ class _BusinessSignUpFormState extends State<BusinessSignUpForm> {
   Widget logo;
   String date;
   String businessLegalName, businessName;
-  String registeredNumber, mobileNumber;
+  String registeredNumber, mobileNumber, emailAddress;
   String registeredAddress, physicalAddress, officialWebsite;
   String legalEntity, legalEntityOther;
   String ntnCnicNumber;
@@ -101,8 +101,9 @@ class _BusinessSignUpFormState extends State<BusinessSignUpForm> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.apiKey == null || widget.apiKey.isEmpty)
+    if (widget.apiKey == null || widget.apiKey.isEmpty) {
         throw Exception(Constant.General.API_KEY_REQUIRED);
+    }
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
@@ -366,6 +367,18 @@ class _BusinessSignUpFormState extends State<BusinessSignUpForm> {
                                 else return null;
                               },
                               onChanged: (val) => physicalAddress = val,
+                            ),
+                          ),
+                          // Email address
+                          Padding(
+                            padding: Constant.PaddingDetails.textTopPadding,
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                border: const OutlineInputBorder(),
+                                labelText: Constant.FormLabels.EMAIL_ADDRESS
+                              ),
+                              onChanged: (val) => emailAddress = val,
+                              keyboardType: TextInputType.emailAddress,
                             ),
                           ),
                           // Official website
@@ -979,9 +992,10 @@ class _BusinessSignUpFormState extends State<BusinessSignUpForm> {
                         children: [
                           // Foree Logo
                           new Container(
-                              width: Constant.Layout.dp100,
-                              height: Constant.Layout.dp50,
-                              child: new Image.asset("assets/images/foree_logo.png")
+                            width: Constant.Layout.dp100,
+                            height: Constant.Layout.dp50,
+                              // child: new Image.asset("assets/images/foree_logo.png")
+                            child: new Image.network("https://foree.co/assets/img/logo.png"),
                           ),
                           new Row(
                             mainAxisAlignment: MainAxisAlignment.end,
@@ -990,39 +1004,48 @@ class _BusinessSignUpFormState extends State<BusinessSignUpForm> {
                               Padding(
                                 padding: const EdgeInsets.only(left: Constant.Layout.dp5),
                                 child: new ElevatedButton(
-                                    onPressed: () {
-                                      if (_formKey.currentState.validate()) {
-                                        if (_banks.isNotEmpty) {
-                                          rawResult.setDate(date);
-                                          // logo is missing.
-                                          rawResult.setBusinessLegalName(businessLegalName);
-                                          rawResult.setBusinessName(businessName);
-                                          rawResult.setRegisteredNumber(registeredNumber);
-                                          rawResult.setMobileNumber(mobileNumber);
-                                          rawResult.setRegisteredAddress(registeredAddress);
-                                          rawResult.setPhysicalAddress(physicalAddress);
-                                          rawResult.setOfficialWebSite(officialWebsite);
-                                          rawResult.setLegalEntity(legalEntity);
-                                          rawResult.setLegalEntityOther(legalEntityOther);
-                                          rawResult.setNtnCnicNumber(ntnCnicNumber);
-                                          rawResult.setAuthorizedSignatoryName(authorizedSignatoryName);
-                                          rawResult.setAuthorizedSignatoryCnic(authorizedSignatoryCnic);
-                                          rawResult.setBusinessCategory(businessCategory);
-                                          rawResult.setOfficePremises(officePremises);
-                                          rawResult.setYearAtCurrentLocation(yearsAtCurrentLocation);
-                                          rawResult.setYearAtCurrentBusiness(yearsAtCurrentBusiness);
-                                          rawResult.setExpectedMonthlyTurnOver(expectedMonthlyTurnOver);
-                                          rawResult.setBankName(bankName);
-                                          rawResult.setBranchName(branchName);
-                                          rawResult.setAccountTitle(accountTitle);
-                                          rawResult.setBranchCode(branchCode);
-                                          rawResult.setAccountNumber(accountNumber);
-                                          rawResult.setIban(iBan);
-                                          // Implement api call to send data to foree server.
-                                        }
+                                  onPressed: () {
+                                    if (mobileNumber == null || mobileNumber.isEmpty) {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          new SnackBar(
+                                              content: new Text(
+                                                "Mobile number cannot be empty"
+                                              )
+                                          )
+                                      );
+                                    } else {
+                                      if (_banks.isNotEmpty) {
+                                        rawResult.setDate(date);
+                                        // logo is missing.
+                                        rawResult.setBusinessLegalName(businessLegalName);
+                                        rawResult.setBusinessName(businessName);
+                                        rawResult.setRegisteredNumber(registeredNumber);
+                                        rawResult.setMobileNumber(mobileNumber);
+                                        rawResult.setRegisteredAddress(registeredAddress);
+                                        rawResult.setPhysicalAddress(physicalAddress);
+                                        rawResult.setEmailAddress(emailAddress);
+                                        rawResult.setOfficialWebSite(officialWebsite);
+                                        rawResult.setLegalEntity(legalEntity);
+                                        rawResult.setLegalEntityOther(legalEntityOther);
+                                        rawResult.setNtnCnicNumber(ntnCnicNumber);
+                                        rawResult.setAuthorizedSignatoryName(authorizedSignatoryName);
+                                        rawResult.setAuthorizedSignatoryCnic(authorizedSignatoryCnic);
+                                        rawResult.setBusinessCategory(businessCategory);
+                                        rawResult.setOfficePremises(officePremises);
+                                        rawResult.setYearAtCurrentLocation(yearsAtCurrentLocation);
+                                        rawResult.setYearAtCurrentBusiness(yearsAtCurrentBusiness);
+                                        rawResult.setExpectedMonthlyTurnOver(expectedMonthlyTurnOver);
+                                        rawResult.setBankName(bankName);
+                                        rawResult.setBranchName(branchName);
+                                        rawResult.setAccountTitle(accountTitle);
+                                        rawResult.setBranchCode(branchCode);
+                                        rawResult.setAccountNumber(accountNumber);
+                                        rawResult.setIban(iBan);
+                                        // Implement api call to send data to foree server.
                                       }
-                                    },
-                                    child: new Text(Constant.ButtonTags.SAVE)
+                                    }
+                                  },
+                                  child: new Text(Constant.ButtonTags.SAVE)
                                 ),
                               ),
                               // Button Next
@@ -1039,6 +1062,7 @@ class _BusinessSignUpFormState extends State<BusinessSignUpForm> {
                                         rawResult.setMobileNumber(mobileNumber);
                                         rawResult.setRegisteredAddress(registeredAddress);
                                         rawResult.setPhysicalAddress(physicalAddress);
+                                        rawResult.setEmailAddress(emailAddress);
                                         rawResult.setOfficialWebSite(officialWebsite);
                                         rawResult.setLegalEntity(legalEntity);
                                         rawResult.setLegalEntityOther(legalEntityOther);

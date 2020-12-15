@@ -11,6 +11,7 @@ class Result {
   String mobileNumber;
   String registeredAddress;
   String physicalAddress;
+  String emailAddress;
   String officialWebsite;
   String legalEntity;
   String legalEntityOther;
@@ -32,13 +33,14 @@ class Result {
 
   Result(this.businessCode, this.businessLogo, this.date, this.businessLegalName,
       this.businessName, this.registeredNumber, this.mobileNumber,
-      this.registeredAddress, this.physicalAddress, this.officialWebsite,
-      this.legalEntity, this.legalEntityOther, this.ntnCnicNumber,
-      this.authorizedSignatoryName, this.authorizedSignatoryCnic,
-      this.businessCategory, this.officePremises, this.yearAtCurrentLocation,
-      this.yearAtCurrentBusiness, this.expectedMonthlyTurnOver, this.bankName,
-      this.branchName, this.accountTitle, this.branchCode, this.accountNumber,
-      this.iBan, this.partnerDetails);
+      this.registeredAddress, this.physicalAddress, this.emailAddress,
+      this.officialWebsite, this.legalEntity, this.legalEntityOther,
+      this.ntnCnicNumber, this.authorizedSignatoryName,
+      this.authorizedSignatoryCnic, this.businessCategory, this.officePremises,
+      this.yearAtCurrentLocation, this.yearAtCurrentBusiness,
+      this.expectedMonthlyTurnOver, this.bankName, this.branchName,
+      this.accountTitle, this.branchCode, this.accountNumber, this.iBan,
+      this.partnerDetails);
 
   void setBusinessCode(String val) {
     this.businessCode = val;
@@ -74,6 +76,10 @@ class Result {
 
   void setPhysicalAddress(String val) {
     this.physicalAddress = val;
+  }
+
+  void setEmailAddress(String val) {
+    this.emailAddress = val;
   }
 
   void setOfficialWebSite(String val) {
@@ -154,9 +160,9 @@ class Result {
       json['date'] as String, json['business_legal_name'] as String,
       json['business_name'] as String, json['registered_number'] as String,
       json['mobile_number'] as String, json['registered_address'] as String,
-      json['physical_address'] as String, json['official_website'] as String,
-      json['legal_entity'] as String, json['legal_entity_other'] as String,
-      json['ntn_cnic_number'] as String,
+      json['physical_address'] as String, json['email_address'] as String,
+      json['official_website'] as String, json['legal_entity'] as String,
+      json['legal_entity_other'] as String, json['ntn_cnic_number'] as String,
       json['name_of_authorized_signatory'] as String,
       json['authorized_signatory_cnic'] as String,
       json['business_category'] as String, json['office_premises'] as String,

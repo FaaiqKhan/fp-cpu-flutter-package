@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ErrorFields {
@@ -236,6 +235,7 @@ class FormLabels {
   static const String MOBILE_NUMBER = "Mobile Number";
   static const String REGISTERED_ADDRESS = "Registered Address";
   static const String PHYSICAL_ADDRESS = "Physical Address";
+  static const String EMAIL_ADDRESS = "Email Address";
   static const String OFFICIAL_WEBSITE = "Official Website";
   static const String LEGAL_ENTITY = "Legal Entity";
   static const String NTN_CNIC_NUMBER = "NTN/CNIC Number";
@@ -279,4 +279,5 @@ class AssetsPath {
   static const String BANKS = "assets/banks";
   static const String RESULT = "assets/result";
   static const String RESULT_OBJECT = "assets/resultObject";
+  static const String FOREE_LOGO = "assets/images/foree_logo.png";
 }
