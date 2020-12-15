@@ -276,7 +276,6 @@ class FieldKeys {
 }
 
 class AssetsPath {
-  static const String BANKS = "assets/banks";
   static const String RESULT = "assets/result";
   static const String RESULT_OBJECT = "assets/resultObject";
   static const String FOREE_LOGO = "https://foree.co/assets/img/logo.png";
