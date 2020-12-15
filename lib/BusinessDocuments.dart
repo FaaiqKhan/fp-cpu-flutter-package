@@ -4,16 +4,17 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'ResultObject.dart';
 
 import 'Constants.dart' as Constant;
+import 'Result.dart';
 import 'Utils.dart';
 
 class BusinessDocuments extends StatefulWidget {
   final String title;
-  final ResultObject data;
+  final Result data;
   final Widget logo;
-  BusinessDocuments({Key key, this.title, this.data, this.logo}) : super(key: key);
+  BusinessDocuments(
+      {Key key, this.title, this.data, this.logo}) : super(key: key);
 
   @override
   _BusinessDocumentsState createState() => _BusinessDocumentsState(data);
@@ -31,6 +32,14 @@ class _BusinessDocumentsState extends State<BusinessDocuments> {
     Constant.RequiredDocs.UTILITY_BILL: false
   };
 
+  Map<String, String> rd = {
+    Constant.RequiredDocs.CNIC: Constant.RequiredDocs.C,
+    Constant.RequiredDocs.M_CERTIFICATE: Constant.RequiredDocs.MC,
+    Constant.RequiredDocs.NTN: Constant.RequiredDocs.NT,
+    Constant.RequiredDocs.R_CERTIFICATE: Constant.RequiredDocs.RC,
+    Constant.RequiredDocs.UTILITY_BILL: Constant.RequiredDocs.UB
+  };
+
   Future<void> uploadImage(FileType type, String pathOf) async {
     await FilePicker.getFilePath(type: type)
       .then((value) {
@@ -43,9 +52,9 @@ class _BusinessDocumentsState extends State<BusinessDocuments> {
       });
   }
 
-  ResultObject rawResult;
+  Result rawResult;
 
-  _BusinessDocumentsState(ResultObject object) {
+  _BusinessDocumentsState(Result object) {
     this.rawResult = object;
   }
 
@@ -102,7 +111,8 @@ class _BusinessDocumentsState extends State<BusinessDocuments> {
                                       width: Constant.Layout.uploadLogoW,
                                       height: MediaQuery.of(context).size.height,
                                       child: new Card(
-                                        color: Color(0x8D8D8D),
+                                        elevation: 0,
+                                        color: Colors.transparent,
                                         child: Stack(
                                           children: [
                                             Center(
@@ -219,7 +229,8 @@ class _BusinessDocumentsState extends State<BusinessDocuments> {
                                       width: Constant.Layout.uploadLogoW,
                                       height: MediaQuery.of(context).size.height,
                                       child: new Card(
-                                        color: Color(0x8D8D8D),
+                                        elevation: 0,
+                                        color: Colors.transparent,
                                         child: Stack(
                                           children: [
                                             Center(
@@ -337,7 +348,8 @@ class _BusinessDocumentsState extends State<BusinessDocuments> {
                                       width: Constant.Layout.uploadLogoW,
                                       height: MediaQuery.of(context).size.height,
                                       child: new Card(
-                                        color: Color(0x8D8D8D),
+                                        elevation: 0,
+                                        color: Colors.transparent,
                                         child: Stack(
                                           children: [
                                             Center(
@@ -452,7 +464,8 @@ class _BusinessDocumentsState extends State<BusinessDocuments> {
                                         width: Constant.Layout.uploadLogoW,
                                         height: MediaQuery.of(context).size.height,
                                         child: new Card(
-                                          color: Color(0x8D8D8D),
+                                          elevation: 0,
+                                          color: Colors.transparent,
                                           child: Stack(
                                             children: [
                                               Center(
@@ -567,7 +580,8 @@ class _BusinessDocumentsState extends State<BusinessDocuments> {
                                           width: Constant.Layout.uploadLogoW,
                                           height: MediaQuery.of(context).size.height,
                                           child: new Card(
-                                            color: Color(0x8D8D8D),
+                                            elevation: 0,
+                                            color: Colors.transparent,
                                             child: Stack(
                                               children: [
                                                 Center(
@@ -675,22 +689,42 @@ class _BusinessDocumentsState extends State<BusinessDocuments> {
                             Map<String, String> data = Map();
                             for (var val in path.entries)
                               data[val.key] = Utilities.getImageBase64(val.value);
-                            rawResult.setBusinessDocument(new BusinessDocument(
-                                data[Constant.RequiredDocs.cnic],
-                                data[Constant.RequiredDocs.mc],
-                                data[Constant.RequiredDocs.ntn],
-                                data[Constant.RequiredDocs.rc],
-                                data[Constant.RequiredDocs.ub]
-                            ));
+                            /*rawResult.setBusinessDocument(
+                                new BusinessDocument(
+                                  data[Constant.RequiredDocs.cnic],
+                                  data[Constant.RequiredDocs.mc],
+                                  data[Constant.RequiredDocs.ntn],
+                                  data[Constant.RequiredDocs.rc],
+                                  data[Constant.RequiredDocs.ub]
+                                )
+                            );*/
                             Constant.SharedPref.save("ok", rawResult.toJson());
                           } else {
-                            Navigator.pop(context, "Ok the result is here");
-                            /*ScaffoldMessenger.of(context).showSnackBar(
-                              new SnackBar(
-                                content: new Text(
-                                  "Please upload all the required documents"
-                                ),
-                              ));*/
+                            String da = "";
+                            for (var val in requiredDocs.entries) {
+                              if (!val.value) {
+                                if (da.isEmpty)
+                                  da = da + rd[val.key];
+                                else
+                                  da = da + ", " + rd[val.key];
+                              }
+                            }
+                            if (da.isNotEmpty) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  new SnackBar(
+                                    content: new Text(
+                                        "Please upload all the required documents: " + da
+                                    ),
+                                  ));
+                            } else {
+                              // Navigator.pop(context, "Ok the result is here");
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  new SnackBar(
+                                    content: new Text(
+                                        "Your form is submitted"
+                                    ),
+                                  ));
+                            }
                           }
                         },
                         child: Text("Submit"),

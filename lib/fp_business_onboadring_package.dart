@@ -2,10 +2,11 @@ library fp_business_onboadring_package;
 
 import 'dart:convert';
 
-import 'Constants.dart';
-import 'ResultObject.dart';
+import 'package:fp_business_onboadring_package/Result.dart';
 
-Future<ResultObject> loadResultAssets() async {
+import 'Constants.dart';
+
+Future<Result> loadResultAssets() async {
   String jsonResponse = await RequiredAssets.loadResult();
-  return ResultObject.fromJson(jsonDecode(jsonResponse));
+  return Result.fromJson(jsonDecode(jsonResponse));
 }

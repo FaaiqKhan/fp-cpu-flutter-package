@@ -144,6 +144,12 @@ class RequiredDocs {
 
   static const String logoText = "Business Logo";
   static const String logoDescription = "Billers can upload their Business logo. This logo will be reflected in Foree App alongside the business name";
+
+  static const String C = "CNIC";
+  static const String MC = "Account Maintenance Certificate";
+  static const String NT = "NTN";
+  static const String RC = "Registration Certificate";
+  static const String UB = "Utility bills";
 }
 
 class Layout {
@@ -214,10 +220,12 @@ class General {
   ];
   static const List<String> PREMISES_TYPES = ["Owned", "Rented", "Leased"];
   static const String PAK_RUPEE = "PKR ";
+  static const String API_KEY_REQUIRED = "API key is required";
 }
 
 class PageTitle {
   static const String BUSINESS_SIGN_UP = "Business Sign Up";
+  static const String BUSINESS_DOCUMENTS = "Business Documents";
 }
 
 class FormLabels {
@@ -256,6 +264,21 @@ class FormLabels {
 
 class PaddingDetails {
   static const textTopPadding =  EdgeInsets.only(top: 15.0);
+}
+
+class FieldKeys {
+  static const String BUSINESS_NAME = "businessName";
+  static const String CNIC = "cnic";
+  static const String MOBILE_NUMBER = "mobileNumber";
+  static const String LOGO = "logo";
+  static const String BANK_ID = "bank_id";
+  static const String BANK_SHORT_NAME = "bank_short_name";
+}
+
+class AssetsPath {
+  static const String BANKS = "assets/banks";
+  static const String RESULT = "assets/result";
+  static const String RESULT_OBJECT = "assets/resultObject";
 }
 
 class RequiredAssets {
