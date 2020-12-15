@@ -287,4 +287,9 @@ class RequiredAssets {
         package: 'fp_business_onboadring_package');
     return await rootBundle.loadString(resultAsset.keyName);
   }
+  static Future<String> loadBanks() async {
+    var bankAsset = AssetImage(AssetsPath.BANKS,
+        package: 'fp_business_onboadring_package');
+    return await rootBundle.loadString(bankAsset.keyName);
+  }
 }

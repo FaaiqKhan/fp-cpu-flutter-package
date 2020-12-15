@@ -16,7 +16,8 @@ Future<String> loadBanks() async {
 
 Future<Map<String, String>> loadBankAssets() async {
   Map<String, String> banks = Map();
-  String banksJsonString = await loadBanks();
+  // String banksJsonString = await loadBanks();
+  String banksJsonString = await Constant.RequiredAssets.loadBanks();
   List<dynamic> banksResponse = jsonDecode(banksJsonString);
   for (var bank in banksResponse)
     banks[bank[Constant.FieldKeys.BANK_ID]] = bank[Constant.FieldKeys.BANK_SHORT_NAME];
