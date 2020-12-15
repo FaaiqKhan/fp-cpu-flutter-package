@@ -283,7 +283,8 @@ class AssetsPath {
 
 class RequiredAssets {
   static Future<String> loadResult() async {
-    var resultAsset = AssetImage('assets/result', package: 'fp_business_onboadring_package');
+    var resultAsset = AssetImage(AssetsPath.RESULT_OBJECT,
+        package: 'fp_business_onboadring_package');
     return await rootBundle.loadString(resultAsset.keyName);
   }
 }
